@@ -11,6 +11,7 @@ permissions:
   contents: write
 
 jobs:
+
   register-dataset:
 
     runs-on: ubuntu-latest
@@ -25,7 +26,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pandas
+          pip install -r requirements.txt
 
       - name: Register Dataset
         run: |
@@ -36,6 +37,7 @@ jobs:
         with:
           name: registered-data
           path: tourism_project/data/tourism.csv
+
 
   data-prep:
 
@@ -53,7 +55,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pandas scikit-learn
+          pip install -r requirements.txt
 
       - name: Run Data Preparation
         run: |
@@ -66,6 +68,7 @@ jobs:
           path: |
             tourism_project/model_building/prepared_data/train.csv
             tourism_project/model_building/prepared_data/test.csv
+
 
   model-training:
 
@@ -83,7 +86,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pandas scikit-learn joblib mlflow==3.0.1
+          pip install -r requirements.txt
 
       - name: Download Train Test Splits
         uses: actions/download-artifact@v4
